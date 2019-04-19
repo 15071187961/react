@@ -4,6 +4,8 @@ import {message} from 'antd'
 import axios from 'axios'
 import isLogin from './IsLogin'
 import '../css/loginnav.css'
+
+
 class LoginCompoent extends React.Component{
   constructor(props) {
     super(props);
@@ -15,14 +17,20 @@ class LoginCompoent extends React.Component{
     if(isLogin()){
       const userid = localStorage.getItem("hyquser_id")
       const usertoken = localStorage.getItem("hyqutoken")
-      axios.post("/user/info/info",{
-        user_id_check:userid,
-        token_check:usertoken
-      }).then(function (response) {
-        _that.setState({userInfo:response.data.data})
-      }).catch(function (err) {
-        alert(err)
-      })
+      if(userid && usertoken){
+        axios.post("/user/info/info",{
+          user_id_check:userid,
+          token_check:usertoken
+        }).then(function (response) {
+          _that.setState({userInfo:response.data.data})
+          localStorage.setItem("USER_INFO_DATA",JSON.stringify(response.data.data))
+
+        }).catch(function (err) {
+          alert(err)
+        })
+      }
+
+
       _that.setState({userid: userid,usertoken:usertoken});
     }
 
@@ -44,6 +52,7 @@ class LoginCompoent extends React.Component{
           localStorage.removeItem("hyquser_id")
           localStorage.removeItem("hyqutoken")
           _that.setState({userid:'',usertoken:''})
+          window.location.href="/"
         }
       }).catch(function (err) {
         alert(err)
@@ -67,7 +76,7 @@ class LoginCompoent extends React.Component{
       }else {
         return (
           <div >
-            <NavLink to="/smslogin" className="text-white px-4" activeClassName='headtopactive' >登陆</NavLink>
+            <NavLink to="/pwdlogin" className="text-white px-4" activeClassName='headtopactive' >登陆</NavLink>
             <NavLink to="/register"  className="text-white"  activeClassName='headtopactive'>注册</NavLink>
           </div>
         )

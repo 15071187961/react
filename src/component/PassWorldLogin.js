@@ -4,7 +4,6 @@ import LoginWrap from "./LoginWrap";
 import LoginNav from "./LoginNav";
 import '../css/login.css'
 import {Link} from 'react-router-dom'
-import Header from "./Header";
 
 class  PassWorldLogin extends React.Component{
   constructor(props){
@@ -38,8 +37,6 @@ class  PassWorldLogin extends React.Component{
          }else {
            alert(resopnse.data.err)
          }
-
-
        }).catch(function (err) {
          alert(err)
        })

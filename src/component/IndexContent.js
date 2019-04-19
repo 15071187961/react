@@ -1,10 +1,32 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {user_data} from './userInfo/LocalStorage'
 import icon1 from '../img/icon.png'
 import icon2 from '../img/icon (2).png'
 import icon3 from '../img/icon (3).png'
 
 class IndexContent  extends React.Component{
+  constructor(props){
+    super(props)
+  }
+  handleFabu = () => {
+      console.log(user_data && user_data.usertype == "企业用户")
+      if(user_data || user_data.usertype == "企业用户"){
+        alert("您还没有登录或者未认证企业用户")
+      }else{
+        window.location.href="xq"
+      }
+  }
+  handelqianyue =() =>{
+    console.log(new Boolean(user_data))
+    console.log( user_data.usertyp !== "个人用户")
+    if(user_data || user_data.usertyp !== "个人用户"){
+      window.location.href="contract";
+    }else{
+      alert("您还没有登录或者非个人用户")
+    }
+
+  }
   render(){
     return(
       <div>
@@ -18,10 +40,10 @@ class IndexContent  extends React.Component{
                 </div>
               </div>
               <div className="row justify-content-center h-50 align-items-start pt-5">
-                <Link to="/xq"
+                <a href="#" onClick={this.handleFabu}
                    className="col-4 bg-orgin mx-5 d-block align-items-center rounded text-white d-flex justify-content-center fontSize28"
-                   >免费发布需求</Link>
-                <a href="/"
+                   >免费发布需求</a>
+                <a href="#" onClick={this.handelqianyue}
                    className="col-4 indexborder mx-5 d-block align-items-center rounded text-white d-flex justify-content-center fontSize28"
                    >申请签约金接单</a>
               </div>

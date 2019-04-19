@@ -74,7 +74,7 @@ class UserInfo extends React.Component{
 
 
 
-              <UserInfoTabs />
+              <UserInfoTabs userInfor={this.state.userdata}/>
 
 
           </div>

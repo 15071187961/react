@@ -27,13 +27,7 @@ import UserSelfInfo from './component/userSelfinfo/UserSelfInfo'
 import UserOrderInfo from "./component/userSelfinfo/UserOrderInfo";
 
 
-function Child({match}) {
-  return (
-    <div>
-      <h3>ID:{match.params.id}</h3>
-    </div>
-  )
-}
+
 
 function App() {
   return (

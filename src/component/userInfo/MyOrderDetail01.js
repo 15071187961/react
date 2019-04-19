@@ -195,7 +195,7 @@ class MyOrderDetail extends React.Component{
                         <div>{this.props._data.address}</div>
                     </Col>
                 </Row>
-               <div style={{display:_flag?"none":""}}>
+               <div style={{display:_flag?"":"none"}}>
                    <div className="d-flex justify-content-center align-content-center mt-5" >
                        <Modal selectSuccessP = {this.selectSuccessP} orderData = {this.props._data} selectSuccess={this.state.selectSuccess} orderIdOk ={this.props.orderIdOk}/>
 

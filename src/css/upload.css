@@ -11,3 +11,9 @@
     float: none!important;
     margin-right: 0!important;
 }
+.ant-upload-list-picture-card .ant-upload-list-item, .ant-form-item-children .ant-upload.ant-upload-select-picture-card {
+    width: 200px!important;
+    height: 200px!important;
+    float: none!important;
+    margin-right: 0!important;
+}

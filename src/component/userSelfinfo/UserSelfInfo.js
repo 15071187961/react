@@ -21,7 +21,7 @@ class UserInfo extends React.Component{
       user_id_check:userid,
       token_check:usertoken
     }).then(function (response) {
-      console.log(response)
+
       if(response.data.res === 1){
         console.log("用户认证成功")
         _that.setState({userdata: response.data.data})
@@ -49,7 +49,7 @@ class UserInfo extends React.Component{
             <UserInfoTool />
           </div>
           <div className="margin_left10 shadow borderGray" style={{flex:1}}>
-            <UserInfoTabs />
+            <UserInfoTabs userInfor={this.state.userdata}/>
           </div>
         </div>
       </div>

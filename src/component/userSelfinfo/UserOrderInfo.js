@@ -13,10 +13,6 @@ class UserOrderInfo extends  React.Component{
     const orderInfo = this.props.orderinfo
     return (
       <div>
-        <span  className="mr-2 d-flex align-items-center cursor-pointer my-2 px-4 fontSize20 text-warning" onClick={this.props.backClick}>
-              <Icon type="left" />
-              返回列表
-        </span>
         <Row className="px-4 py-3 bg-secondary ">
           <Col span={6} className="fontSize14">
             订单号:{orderInfo.goodsid}

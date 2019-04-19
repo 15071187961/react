@@ -15,7 +15,7 @@ class SearchComponent extends React.Component{
                 <Search className="my-3"
                         placeholder="搜素条件"
                         enterButton="搜索"
-                        onSearch={value => console.log(value)}
+                        onSearch={value => this.props.searchBtn(value)}
                 />
             </Form>
         )

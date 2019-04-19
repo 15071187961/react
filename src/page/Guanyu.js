@@ -16,7 +16,7 @@ class Guanyu extends React.Component{
           <Title title="关于我们"/>
           <SecondTitle title="文案文案文案文案文案文案文案"/>
           <div className="d-flex justify-content-center">
-            <FabuBtn link="/xq" linktitle="了解详情" />
+            <FabuBtn link="/" linktitle="了解详情" />
           </div>
         </PageBanner>
         <BorderLineBlock title="公司介绍"/>

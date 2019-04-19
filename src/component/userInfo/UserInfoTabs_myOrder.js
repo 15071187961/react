@@ -17,64 +17,118 @@ class UserInfoTabsOrder extends React.Component{
             deleteID:"",
             myTask:[
                 {
-                    id:0,
-                    text:"我发布的任务",
+                    id:1,
+                    text:"月结",
                 },
                 {
-                    id:1,
-                    text:"我承接的任务",
+                    id:2,
+                    text:"日结",
+                },
+                {
+                    id:3,
+                    text:"其他",
                 }
             ],
             taskType:[
 
                 {
-                    id:0,
-                    text:"全职任务",
-                },
-                {
                     id:1,
-                    text:"兼职任务",
+                    text:"兼职",
                 },
                 {
                     id:2,
-                    text:"企业任务",
+                    text:"全职",
+                },
+                {
+                    id:3,
+                    text:"其他",
                 }
             ],
             orderStatus:[
                 {
                     id:0,
-                    text:"审核中",
+                    text:"未审核",
                 },
                 {
                     id:1,
-                    text:"等待发布",
+                    text:"已经审核",
                 },
-                {
-                    id:2,
-                    text:"已发布",
-                }
             ]
 
         };
+        this.searchBtn = this.searchBtn.bind(this)
+        this.searchMyTaskClick = this.searchMyTaskClick.bind(this)
+        this.searchTaskClick = this.searchTaskClick.bind(this)
+        this.searchOrderStatusClick = this.searchOrderStatusClick.bind(this)
         Object.assign(this.state,this.props)
     }
     searchMyTaskClick(e){
         console.log("我的类型")
         console.log(e)
         console.log(e.key)
+        const _that = this
+        axios.post("/user/goods/index",{
+            user_id_check:_that.state.user_id_check,
+            token_check:_that.state.token_check,
+            pricetype:e.key
+        }).then(function (response) {
+            if(response.data.res === 1){
+                console.log("table")
+                console.log( response.data.data)
+                _that.setState({orderData: response.data.data})
+            }else{
+                alert(response.data.err)
+
+            }
+        }).catch(function (err) {
+            alert(err)
+        })
+
     }
     searchTaskClick(e){
         console.log("业务类型")
         console.log(e)
         console.log(e.key)
+        const _that = this
+        axios.post("/user/goods/index",{
+            user_id_check:_that.state.user_id_check,
+            token_check:_that.state.token_check,
+            titletype:e.key
+        }).then(function (response) {
+            if(response.data.res === 1){
+                console.log("table")
+                console.log( response.data.data)
+                _that.setState({orderData: response.data.data})
+            }else{
+                alert(response.data.err)
+
+            }
+        }).catch(function (err) {
+            alert(err)
+        })
+
     }
     changeHref(){
         window.location.href="/faburenwu"
     }
     searchOrderStatusClick(e){
-        console.log("订单类型")
-        console.log(e)
-        console.log(e.key)
+        const _that = this
+        axios.post("/user/goods/index",{
+            user_id_check:_that.state.user_id_check,
+            token_check:_that.state.token_check,
+            show:e.key
+        }).then(function (response) {
+            if(response.data.res === 1){
+                console.log("table")
+                console.log( response.data.data)
+                _that.setState({orderData: response.data.data})
+            }else{
+                alert(response.data.err)
+
+            }
+        }).catch(function (err) {
+            alert(err)
+        })
     }
     componentDidMount(){
         const userid = localStorage.getItem("hyquser_id")
@@ -108,6 +162,27 @@ class UserInfoTabsOrder extends React.Component{
         console.log("取消删除");
 
     }
+    searchBtn(e){
+        console.log("nihao")
+        console.log(e)
+        const _that = this
+        axios.post("/user/goods/index",{
+            user_id_check:this.state.user_id_check,
+            token_check:this.state.token_check,
+            title:e
+        }).then(function (response) {
+            if(response.data.res === 1){
+                console.log("table")
+                console.log( response.data.data)
+                _that.setState({orderData: response.data.data})
+            }else{
+                alert(response.data.err)
+
+            }
+        }).catch(function (err) {
+            alert(err)
+        })
+    }
     confirm(ID,index){
 
         const _that = this;
@@ -135,7 +210,7 @@ class UserInfoTabsOrder extends React.Component{
            <div>
                <div className="d-flex align-items-center justify-content-between fontSize16" style={{margin:"0 15px"}}>
                    <div>
-                       <SearchComponent />
+                       <SearchComponent searchBtn={this.searchBtn}/>
                    </div>
                    <div>
                        <Button type="primary" onClick={this.changeHref} >发布任务</Button>
@@ -152,7 +227,11 @@ class UserInfoTabsOrder extends React.Component{
                           }
                       }}
                >
-
+                   <Column
+                       title="项目名称"
+                       dataIndex="title"
+                       key="title"
+                   />
                    <Column
                        title={< DropDown _data={this.state.myTask} searchClick={this.searchMyTaskClick} title="订单分类"/>}
                        dataIndex="pricetype"

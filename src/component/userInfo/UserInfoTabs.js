@@ -93,7 +93,7 @@ class UserInfoTabs extends React.Component{
 
 
         </TabPane>
-        <TabPane tab="个人设置" key="2"><UserSeting/></TabPane>
+        <TabPane tab="个人设置" key="2"><UserSeting userInfor={this.props.userInfor}/></TabPane>
         <TabPane tab="修改密码" key="3"><UserSetingPwd /></TabPane>
         <TabPane tab="退出登陆" key="4" onClick={this.loginOut}>Content of tab 4</TabPane>
         </Tabs>

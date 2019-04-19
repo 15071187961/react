@@ -33,7 +33,7 @@ class DropDown extends React.Component{
     render() {
         if(this.props._data){
             var menu = this.props._data.map((value,key)=>
-                <Menu.Item key={key}>{value.text}</Menu.Item>
+                <Menu.Item key={value.id}>{value.text}</Menu.Item>
             )
         }
 

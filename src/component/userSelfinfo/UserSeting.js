@@ -18,6 +18,14 @@ function beforeUpload(file) {
 class UserForm extends React.Component {
   constructor(props) {
     super(props)
+    this.state={
+      userdata:this.props.userInfor,
+      face: [],
+      fileList: [{
+        uid: '-1',
+        url: this.props.userInfor.face,
+      }],
+    }
   }
   handleSubmit = (e) =>{
     e.preventDefault();
@@ -27,8 +35,6 @@ class UserForm extends React.Component {
         return
       }
       const  _that = this;
-      console.log(this.state)
-      console.log(this.props)
       axios.post("/user/info/edit",{
         user_id_check:user_id_check,
         token_check:token_check,
@@ -46,7 +52,7 @@ class UserForm extends React.Component {
       })
     })
   }
-  faceonChange = (url) =>{
+  onChange = (url) =>{
     this.setState({face:url})
   }
   render() {
@@ -57,7 +63,10 @@ class UserForm extends React.Component {
         <Row>
           <Col span={4} className="fontSize18">头像
           </Col>
-          <Col span={20}>
+          <Col span={10}>
+            <img src={this.state.userdata.face} width="180px" height="180px"  style={{borderRadius:"50%"}} alt=""/>
+          </Col>
+          <Col span={10}>
             <Form.Item >
               {getFieldDecorator("face",{
                 rules:[{required:true,message:"请上传一张图片"}]
@@ -65,32 +74,16 @@ class UserForm extends React.Component {
                 <ProjectFileUpload
                   listtyp="picture-card"
                   filemaxlenght={1}
-                  uploadtitle="上传头像"
-                  onChange={this.faceonChange}
+                  uploadtitle="上传新头像"
+                  onChange={this.onChange}
                   beforeUpload={beforeUpload}
                 />
               )}
             </Form.Item>
           </Col>
+
         </Row>
         <hr/>
-        <Row >
-          <Col span={4} className="fontSize18">昵称
-          </Col>
-          <Col span={15}>
-            <Form.Item >
-              {getFieldDecorator("name",{
-                rules:[
-                  {required:true,message:"请填写昵称"},
-                  {max:8,message:"昵称最大长度为8"}
-                ]
-              })(
-                <Input placeholder="天空之城"/>
-              )}
-            </Form.Item>
-          </Col>
-          <Col span={5} className="text-right" style={{marginTop:"10px"}}>最多输入8个字</Col>
-        </Row>
         <hr/>
         <Row >
           <Col span={4} className="fontSize18">邮箱
@@ -98,6 +91,7 @@ class UserForm extends React.Component {
           <Col span={15}>
             <Form.Item >
               {getFieldDecorator("email", {
+                initialValue:this.state.userdata.email,
                 rules: [
                   {required:true,message:"请填写邮箱地址"},
                   {pattern:/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,message:"邮箱格式不正确"}
@@ -115,6 +109,7 @@ class UserForm extends React.Component {
           <Col span={15}>
             <Form.Item>
               {getFieldDecorator("address",{
+                initialValue:this.state.userdata.address.split(","),
                 rules:[{required:true,message:'请选择居住地点'}]
               })(
                 <Cascader className="my-3" style={inputwidth} options={options}  placeholder="请选择居住地址"></Cascader>
