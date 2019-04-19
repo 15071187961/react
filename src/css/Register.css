@@ -1,0 +1,13 @@
+.ant-upload-list-picture-card .ant-upload-list-item,.ant-form-item-children .ant-upload.ant-upload-select-picture-card{
+    width: 299px!important;
+    height:170px!important;
+    float: none!important;
+    margin-right:0!important;
+}
+.ant-steps-item-process > .ant-steps-item-content > .ant-steps-item-title,.ant-steps-item-process > .ant-steps-item-content > .ant-steps-item-description{
+    color: #fc7916 !important;
+}
+.form-control:focus{
+    border-color:#fc7916 !important;
+}
+.ant-btn-lg{height:38px}

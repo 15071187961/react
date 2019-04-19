@@ -1,0 +1,144 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.container{max-width: 1230px}
+@font-face {font-family: 'webfont';
+    src: url('//at.alicdn.com/t/webfont_y6e7u4c51yd.eot'); /* IE9*/
+    src: url('//at.alicdn.com/t/webfont_y6e7u4c51yd.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('//at.alicdn.com/t/webfont_y6e7u4c51yd.woff') format('woff'), /* chrome、firefox */
+    url('//at.alicdn.com/t/webfont_y6e7u4c51yd.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('//at.alicdn.com/t/webfont_y6e7u4c51yd.svg#思源黑体-粗') format('svg'); /* iOS 4.1- */
+}
+a{color: white}
+a:hover{text-decoration: none;color: #ff9608}
+#nav a{color: #635b55;position: relative}
+#navright>div{position: relative;;padding:0 10px  }
+#navright>div:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 0;
+    height: 100%;
+    border-bottom: 2px solid #ff9608;
+    transition: 0.2s all linear;
+}
+#navright>div:hover::before{
+    transition-delay: 0.1s;
+    left: 0;
+    width: 100%;
+}
+#navright>div:hover ~div::before{
+    left: 0;
+}
+body{font-size: 14px}
+.bg-orgin{
+    background: -webkit-linear-gradient(#ff9a07, #fb7418); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#ff9a07, #fb7418); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#ff9a07, #fb7418); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#ff9a07, #fb7418); /* 标准的语法 */
+}
+.bg-dark{background-color: #7b7878 !important;}
+.bg-secondary{background-color: #f5f5f5 !important;}
+.indexborder{border: 3px solid #ff9608}
+.section600{height: 780px;}
+.section1080{height: 960px}
+.gb55{background-color: rgba(55,55,55,0.2);margin: 0 !important;transition: 0.25s ease-in-out}
+.section1{
+    background-image: url("img/1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top;
+}
+.section2{
+    background-image: url("img/2.jpg");
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+
+}
+.section3{
+    background-image: url("img/3.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.section4{
+    background-image: url("img/4.jpg");
+    background-repeat: no-repeat;
+}
+.section5{
+    background-image: url("img/5.jpg");
+    background-repeat: no-repeat;
+}
+.section6{
+    background-image: url("img/6.jpg");
+    background-repeat: no-repeat;
+}
+.cursor-pointer{cursor: pointer}
+.borderline{width: 97px;height: 3px;background-color: white}
+.letter-spacing1{letter-spacing: 1px}
+.letter-spacing2{letter-spacing: 2px}
+.letter-spacing3{letter-spacing: 3px}
+.letter-spacing4{letter-spacing: 4px}
+.letter-spacing5{letter-spacing: 5px}
+.letter-spacing6{letter-spacing: 6px}
+.letter-spacing7{letter-spacing: 7px}
+.letter-spacing8{letter-spacing: 8px}
+.letter-spacing9{letter-spacing: 9px}
+.letter-spacing10{letter-spacing: 10px}
+.text-secondary{color:#7b7878}
+.fontSize10{font-size: 10px}
+.fontSize11{font-size: 11px}
+.fontSize12{font-size: 12px}
+.fontSize13{font-size: 13px}
+.fontSize14{font-size: 14px}
+.fontSize15{font-size: 15px}
+.fontSize16{font-size: 16px}
+.fontSize17{font-size: 17px}
+.fontSize18{font-size: 18px}
+.fontSize19{font-size: 19px}
+.fontSize20{font-size: 20px}
+.fontSize24{font-size: 24px}
+.fontSize25{font-size: 25px}
+.fontSize26{font-size: 26px}
+.fontSize27{font-size: 28px}
+.fontSize28{font-size: 28px}
+.fontSize29{font-size: 29px}
+.fontSize30{font-size: 30px}
+.fontSize32{font-size: 32px}
+.fontSize35{font-size: 35px}
+.fontSize45{font-size: 45px}
+.fontSize52{font-size: 52px}
+.fontSize60{font-size: 60px}
+.line-height60{line-height: 60}
+.line-height90{line-height: 90px}

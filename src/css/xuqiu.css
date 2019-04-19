@@ -1,0 +1,10 @@
+.huibiao{width: 20px;height: 20px;background-color: #f08c00;color: white;font-size: 18px;border-radius: 50%;display: inline-block;}
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    border-color: #f08c00;
+    background-color: #f08c00;
+}
+.curton-chenkbox .iconfont{font-size: 80px;color: #eeeeee !important;}
+.curton-chenkbox input[type=radio]:checked ~label{border: 1px solid #f08c00 !important;color:#f08c00!important; }
+.curton-chenkbox>p{bottom: 0px;left: 0}
+.ant-input-lg{height:inherit!important;}

@@ -1,0 +1,36 @@
+.jiantou{width: 100%;height: 2px;background-color:#ff9709;position: relative;margin-top: -35px}
+.jiantou>div{width:100%;position: absolute;top:0;left:0;bottom:0;right:0}
+.jiantou:after,.jiantou>div:after{
+    content: "";
+    width: 18px;
+    height:2px;
+    position: absolute;
+    right: -2px;
+    bottom: 6px;
+    transform:rotate(45deg);
+    background-color:#ff9709;
+}
+.jiantou>div:after{
+    bottom: -6px;
+    transform:rotate(-45deg);
+}
+.jiantou:before,.jiantou>div:before{
+    content: "";
+    width: 18px;
+    height:2px;
+    position: absolute;
+    left: -2px;
+    bottom: 6px;
+    transform:rotate(-45deg);
+    background-color:#ff9709;
+}
+.jiantou>div:before{
+    bottom: -6px;
+    transform:rotate(45deg);
+}
+.yewutip{
+    box-sizing: border-box;
+    padding:60px 150px;
+    border:2px dashed #ff9709;
+    margin:50px
+}

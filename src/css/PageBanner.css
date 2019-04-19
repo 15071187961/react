@@ -1,0 +1,18 @@
+.pagebanner{
+    height: 950px;padding: 303px;
+    background-size: 100% 100%;
+}
+.title{
+    font-size: 48px;
+
+}
+@media screen and (max-width: 1560px) {
+    .title{
+        font-size: 32px;
+    }
+    .pagebanner{
+        height: 675px;padding: 227px 0;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+}

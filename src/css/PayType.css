@@ -1,0 +1,4 @@
+.ant-tabs-nav .ant-tabs-tab-active:after{background: none!important;}
+.ant-tabs-nav .ant-tabs-tab-active button{border:1px solid #ff9940!important;}
+
+.ant-tabs-bar{border-bottom: none!important;}

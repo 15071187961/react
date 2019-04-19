@@ -1,0 +1,8 @@
+.secondtitle{
+    font-size: 32px;
+}
+@media screen and (max-width: 1560px) {
+    .secondtitle {
+        font-size: 22px;
+    }
+}

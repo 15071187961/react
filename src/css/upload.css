@@ -1,0 +1,13 @@
+.ant-upload {
+    width: 100% !important;
+    border: 2px #eeeeee dashed;
+    line-height: 1.5 !important;
+    cursor: pointer;
+}
+
+.ant-upload-list-picture-card .ant-upload-list-item, .ant-upload.ant-upload-select-picture-card {
+    width: 200px!important;
+    height: 200px!important;
+    float: none!important;
+    margin-right: 0!important;
+}
