@@ -71,8 +71,7 @@ body{font-size: 14px}
 .bg-dark{background-color: #7b7878 !important;}
 .bg-secondary{background-color: #f5f5f5 !important;}
 .indexborder{border: 3px solid #ff9608}
-.section600{height: 780px;}
-.section1080{height: 960px}
+.section600{height: 600px;}
 .gb55{background-color: rgba(55,55,55,0.2);margin: 0 !important;transition: 0.25s ease-in-out}
 .section1{
     background-image: url("img/1.jpg");
@@ -137,7 +136,7 @@ body{font-size: 14px}
 .fontSize30{font-size: 30px}
 .fontSize32{font-size: 32px}
 .fontSize35{font-size: 35px}
-.fontSize45{font-size: 45px}
+.fontSize45{font-size: 45px !important;}
 .fontSize52{font-size: 52px}
 .fontSize60{font-size: 60px}
 .line-height60{line-height: 60}

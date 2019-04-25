@@ -1,121 +1,117 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {user_data} from './userInfo/LocalStorage'
-import icon1 from '../img/icon.png'
-import icon2 from '../img/icon (2).png'
-import icon3 from '../img/icon (3).png'
+import axios from 'axios'
+import indexicon1 from '../img/indexIcon-1.png';
+import indexicon2 from '../img/indexIcon-2.png';
+import indexicon3 from '../img/indexIcon-3.png';
+import indexicon4 from '../img/indexIcon-4.png';
+import indexicon5 from '../img/indexIcon-5.png';
+import indexicon6 from '../img/indexIcon6.png';
+import indexicon7 from '../img/indexIcon-7.png';
+import indexicon8 from '../img/indexIcon-8.png';
+import indexicon9 from '../img/indexIcon-9.png';
+import indexbg2 from '../img/2.jpg'
+import indexbg3 from '../img/3.jpg'
+import isLogin from "../component/IsLogin";
+import FabuBtn from "../page/FabuBtn";
+import IndexTitle from "../component/IndexTitle";
+import IndexShow from "../component/IndexShow";
+import IndexBgImg from "../component/IndexBgImg";
+import IndexBoxShow from "../component/IndexBoxShow";
+import {Banner, FirstLevelTitle, TowLevelTitle} from "./BaseComponents";
+import bannerImg from "../img/1.jpg";
 
-class IndexContent  extends React.Component{
+class Demo  extends React.Component{
   constructor(props){
     super(props)
   }
-  handleFabu = () => {
-      console.log(user_data && user_data.usertype == "企业用户")
-      if(user_data || user_data.usertype == "企业用户"){
-        alert("您还没有登录或者未认证企业用户")
-      }else{
-        window.location.href="xq"
+  componentWillMount(){
+    const _that=this
+    if(isLogin()){
+      const userid = localStorage.getItem("hyquser_id")
+      const usertoken = localStorage.getItem("hyqutoken")
+      if(userid && usertoken){
+        axios.post("/user/info/info",{
+          user_id_check:userid,
+          token_check:usertoken
+        }).then(function (response) {
+          _that.setState({userInfo:response.data.data})
+        }).catch(function (err) {
+          alert(err)
+        })
       }
+      _that.setState({userid: userid,usertoken:usertoken});
+    }
+  }
+  handleFabu = () => {
+    if(!this.state.userInfo){
+      window.location.href="/#/pwdlogin"
+    }else if(this.state.userInfo.usertype === "个人用户"){
+      alert("您是个人用户不能发布需求")
+    }else {
+      window.location.href="/#/faburenwu"
+    }
   }
   handelqianyue =() =>{
-    console.log(new Boolean(user_data))
-    console.log( user_data.usertyp !== "个人用户")
-    if(user_data || user_data.usertyp !== "个人用户"){
-      window.location.href="contract";
+    if(!this.state.userInfo){
+      alert("您还没有登录，请先登录")
+    }else if(this.state.userInfo.usertype === "企业用户" ){
+      alert("您是企业用户不能申请签约金订单")
     }else{
-      alert("您还没有登录或者非个人用户")
+      window.location.href="/#/contract"
     }
 
   }
   render(){
     return(
       <div>
-        <div className="container-fluid p-0 section600 section1">
-          <div className="container-fluid p-0 h-100  gb55">
-            <div className="container h-100">
-              <div className="row h-50 align-items-end">
-                <div className="col">
-                  <h1 className="text-white fontSize60 text-center letter-spacing8 font-weight-light">惠企云一站式综合服务平台</h1>
-                  <p className="fontSize32 text-white text-center font-weight-light">推动共享经济发展 · 缔造自由职业者新工坊</p>
-                </div>
-              </div>
-              <div className="row justify-content-center h-50 align-items-start pt-5">
-                <a href="#" onClick={this.handleFabu}
-                   className="col-4 bg-orgin mx-5 d-block align-items-center rounded text-white d-flex justify-content-center fontSize28"
-                   >免费发布需求</a>
-                <a href="#" onClick={this.handelqianyue}
-                   className="col-4 indexborder mx-5 d-block align-items-center rounded text-white d-flex justify-content-center fontSize28"
-                   >申请签约金接单</a>
+        <Banner bannerImg={bannerImg}>
+          <FirstLevelTitle  className="pb-3" title="惠企云一站式综合服务平台"/>
+          <TowLevelTitle  className=" mb-5" title="推动共享经济发展 · 缔造自由职业者新工坊"/>
+          <div className="container">
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <FabuBtn linktitle="发布信息"/>
+                <a  onClick={this.handelqianyue}
+                    className="col-2 indexborder mx-5 d-block align-items-center rounded text-white d-flex justify-content-center fontSize18">申请签约金接单</a>
               </div>
             </div>
           </div>
-        </div>
-        <div className="container-fluid p-0 section600 section2">
-          <div className="container-fluid p-0 h-100  gb55">
-            <div className="container d-flex h-100 flex-column justify-content-center">
-              <div className="row">
-                <div className="col-12 d-flex justify-content-center align-items-center">
-                  <div className="borderline"></div>
-                  <h2 className="fontSize52 text-white text-center mx-3 letter-spacing8 font-weight-light">云端工作</h2>
-                  <div className="borderline"></div>
-                </div>
-              </div>
-              <div className="row justify-content-center">
-                <div className="col-7">
-                  <ol className="text-white fontSize30">
-                    <li className="py-2">1.文字文字文字文字文字文字文字文字文字文字</li>
-                    <li className="py-2">1.文字文字文字文字文字文字文字文字文字文字</li>
-                    <li className="py-2">1.文字文字文字文字文字文字文字文字文字文字</li>
-                  </ol>
-                </div>
-              </div>
+        </Banner>
+
+        <div className="container-fluid p-0 d-flex flex-column justify-content-around" style={{height:"500px"}}>
+          <IndexTitle title="我们的服务"/>
+          <p className="text-center my-1 mb-5" style={{color:"#5f5f5f"}}>
+            专业安全稳定的用工平台<br/>
+            灵活只能的匹配用工解决用工难题
+          </p>
+          <div className="container mb-5">
+            <div className="row d-flex justify-content-between">
+              <IndexShow src={indexicon1} title="企业难题" />
+              <IndexShow src={indexicon2} title="自由职业者难题" />
+              <IndexShow src={indexicon3} title="会企云解决方案" />
             </div>
           </div>
         </div>
-        <div className="container-fluid p-0 section600 section3">
-          <div className="container-fluid p-0 h-100  gb55">
-            <div className="container d-flex h-100 flex-column justify-content-center">
-              <div className="row">
-                <div className="col-12 d-flex justify-content-center align-items-center">
-                  <div className="borderline"></div>
-                  <h2 className="fontSize52 text-white text-center mx-3 letter-spacing8 font-weight-light">企云公坊</h2>
-                  <div className="borderline"></div>
-                </div>
-              </div>
-              <div className="row justify-content-center">
-                <div className="col-7">
-                  <ol className="text-white fontSize30 font-weight-light">
-                    <li className="py-2">1.文字文字文字文字文字文字文字文字文字文字</li>
-                    <li className="py-2">1.文字文字文字文字文字文字文字文字文字文字</li>
-                    <li className="py-2">1.文字文字文字文字文字文字文字文字文字文字</li>
-                  </ol>
-                </div>
-              </div>
+        <IndexBgImg bgimg={indexbg2}/>
+        <div className="container-fluid p-0 d-flex flex-column justify-content-around" style={{height:"580px"}}>
+          <IndexTitle title="云端工作"/>
+          <div className="container mb-5">
+            <div className="row d-flex justify-content-between">
+              <IndexBoxShow src={indexicon4} titleOne="互联网" titleTow="互联网用工平台"/>
+              <IndexBoxShow src={indexicon5} titleOne="大数据" titleTow="专业数据化分析处理"/>
+              <IndexBoxShow src={indexicon6} titleOne="人工智能" titleTow="更快,更便捷匹配用工"/>
             </div>
           </div>
         </div>
-        <div className="container-fluid p-0 section1080">
-          <div className="row h-100 no-gutters">
-            <div className="col-4 section4  w-100 h-100">
-              <div className="container-fluid p-0 h-100  gb55 d-flex flex-column justify-content-center">
-                <div className="d-flex justify-content-center my-1"><img src={icon1} width="245"
-                                                                         height="200" alt=""/></div>
-                <p className="fontSize45 text-white text-center font-weight-light letter-spacing3">企业难题</p>
-              </div>
-            </div>
-            <div className="col-4 section5 d-flex flex-column justify-content-center w-100 h-100">
-              <div className="container-fluid p-0 h-100 gb55 d-flex flex-column justify-content-center">
-                <div className="d-flex justify-content-center my-1"><img src={icon2} width="245"
-                                                                         height="200" alt=""/></div>
-                <p className="fontSize45 text-white text-center font-weight-light letter-spacing3">自由职业者难题</p>
-              </div>
-            </div>
-            <div className="col-4 section6 d-flex flex-column justify-content-center w-100 h-100">
-              <div className="container-fluid p-0 h-100 gb55 d-flex flex-column justify-content-center">
-                <div className="d-flex justify-content-center my-1"><img src={icon3} width="245"
-                                                                         height="200" alt=""/></div>
-                <p className="fontSize45 text-white text-center font-weight-light letter-spacing3">惠企云解决方案</p>
-              </div>
+        <IndexBgImg bgimg={indexbg3}/>
+        <div className="container-fluid p-0 d-flex flex-column justify-content-around" style={{height:"580px"}}>
+          <IndexTitle title="云端工作"/>
+          <div className="container mb-5">
+            <div className="row d-flex justify-content-between">
+              <IndexBoxShow src={indexicon6} titleOne="企业用工" titleTow="互联网用工平台"/>
+              <IndexBoxShow src={indexicon7} titleOne="解决方案" titleTow="结合大数据解决用工难题"/>
+              <IndexBoxShow src={indexicon8} titleOne="多元化服务" titleTow="满足多元招工需求"/>
             </div>
           </div>
         </div>
@@ -123,4 +119,5 @@ class IndexContent  extends React.Component{
     )
   }
 }
-export default IndexContent;
+
+export default Demo;

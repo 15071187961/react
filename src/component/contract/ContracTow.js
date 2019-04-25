@@ -5,7 +5,9 @@ import {Form,Row,Col,Select,Button,DatePicker,Icon,Input,Upload} from 'antd'
 import FormIcon from "./FormIcon";
 import '../../css/Title.css'
 import FileUpload from "../../page/FileUpload";
+import ProjectFileUpload from "../project/ProjectFileUpload";
 const Option = Select.Option;
+const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const { TextArea } = Input;
 let id = 0;
 class FormTow extends React.Component{
@@ -26,19 +28,19 @@ class FormTow extends React.Component{
       if(!err){
         let work= [
           {
-            bengin:values.begin.format('YYYY-MM-DD'),
-            end:values.end.format('YYYY-MM-DD'),
+            begin:values.wokeTime.map(value => value.format("YYYY-MM-DD"))[0],
+            end:values.wokeTime.map(value => value.format("YYYY-MM-DD"))[1],
             company:values.company,
             job:values.job,
             des:values.des,
           }
          ]
-        if(values.rebegin){
-          for (let i=0;i<values.rebegin.length;i++){
+        if(values.rewokeTime){
+          for (let i=0;i<values.rewokeTime.length;i++){
             work.push(
               {
-                bengin:values.rebegin[i].format('YYYY-MM-DD'),
-                end:values.reend[i].format('YYYY-MM-DD'),
+                begin:values.rewokeTime[i].map(value => value.format("YYYY-MM-DD"))[0],
+                end:values.rewokeTime[i].map(value => value.format("YYYY-MM-DD"))[1],
                 company:values.recompany[i],
                 job:values.rejob[i],
                 des:values.redes[i]
@@ -48,20 +50,20 @@ class FormTow extends React.Component{
         }
         let stu =[
           {
-            begin :values.jiaoyuStart.format('YYYY-MM-DD'),
-            end :values.jiaoyuEnd.format('YYYY-MM-DD'),
+            begin:values.stuTime.map(value => value.format("YYYY-MM-DD"))[0],
+            end:values.stuTime.map(value => value.format("YYYY-MM-DD"))[1],
             school :values.jioayuYxm,
             job :values.jiaoyuZy,
             li:values.jioayuXl,
             des:values.study,
           }
         ]
-        if(values.rejiaoyuStart){
-          for (let j= 0;j<values.rejiaoyuStart.length;j++){
+        if(values.restuTime){
+          for (let j= 0;j<values.restuTime.length;j++){
             stu.push(
               {
-                begin:values.rejiaoyuStart[j].format('YYYY-MM-DD'),
-                end:values.rejiaoyuEnd[j].format('YYYY-MM-DD'),
+                begin:values.restuTime[j].map(value => value.format("YYYY-MM-DD"))[0],
+                end:values.restuTime[j].map(value => value.format("YYYY-MM-DD"))[1],
                 school:values.rejioayuYxm[j],
                 job:values.rejiaoyuZy[j],
                 li:values.rejioayuXl[j],
@@ -138,30 +140,22 @@ class FormTow extends React.Component{
               <Icon className="mx-1" type="minus-circle-o"/>删除工作经历
           </span>):null}
         </h6>
-        <Col span={11}>
+        <Col span={24}>
           <Form.Item>
-            {getFieldDecorator(`rebegin[${k}]`,{
-              rules:[{required:true,message:'请填写工作开始时间'}]
+            {getFieldDecorator(`rewokeTime[${k}]`, {
+              rules:[{required:true,message:'请选择时间'}]
             })(
-              <DatePicker style={inputwidth} placeholder="请填写开始时间"/>
+              <RangePicker style={inputwidth} />
             )}
           </Form.Item>
         </Col>
-        <FormIcon/>
-        <Col span={11}>
-          <Form.Item>
-            {getFieldDecorator(`reend[${k}]`,{
-              rules:[{required:true,message:'请填写工作结束时间'}]
-            })(
-              <DatePicker style={inputwidth} placeholder="请填结束始时间"/>
-            )}
-          </Form.Item>
-        </Col>
-
         <Col span={11}>
           <Form.Item>
             {getFieldDecorator(`recompany[${k}]`,{
-              rules:[{required:true,message:'请填写公司名称'}]
+              rules:[
+                {required:true,message:'请填写公司名称'},
+                {max:50,message:"最多输入50个字符"}
+              ]
             })(
               <Input placeholder="请填写公司名称"/>
             )}
@@ -181,7 +175,10 @@ class FormTow extends React.Component{
         <Col span={24}>
           <Form.Item>
             {getFieldDecorator(`redes[${k}]`,{
-              rules:[{required:true,message:'请简要说明您的工作内容'}]
+              rules:[
+                {required:true,message:'请简要说明您的工作内容'},
+                {max:150,message:"最多输入150个字符"}
+              ]
             })(
               <TextArea rows={5} placeholder="请简要说明您的工作内容"/>
             )}
@@ -198,26 +195,16 @@ class FormTow extends React.Component{
             <h6 className="d-flex my-4 justify-content-between">
               <span>教育经历/1</span>
               {stu.length>0? (<span onClick={()=>this.stuRmove(k)} className="text-danger d-flex align-items-center">
-               <Icon className="mx-1" type="plus"/>添加教育经历
+               <Icon className="mx-1" type="plus"/>删除教育经历
               </span>):null}
             </h6>
           </Col>
-          <Col span={11}>
+          <Col span={24}>
             <Form.Item>
-              {getFieldDecorator(`rejiaoyuStart[${k}]`,{
-                rules:[{required:true,message:'请填写教育开始时间'}]
+              {getFieldDecorator(`restuTime[${k}]`, {
+                rules:[{required:true,message:'请选择时间'}]
               })(
-                <DatePicker style={inputwidth} placeholder="请填写教育开始时间"/>
-              )}
-            </Form.Item>
-          </Col>
-          <FormIcon/>
-          <Col span={11}>
-            <Form.Item>
-              {getFieldDecorator(`rejiaoyuEnd[${k}]`,{
-                rules:[{required:true,message:'请填教育结束始时间'}]
-              })(
-                <DatePicker style={inputwidth} placeholder="请填教育结束始时间"/>
+                <RangePicker style={inputwidth} />
               )}
             </Form.Item>
           </Col>
@@ -226,7 +213,10 @@ class FormTow extends React.Component{
           <Col span={8}>
             <Form.Item>
               {getFieldDecorator(`rejioayuYxm[${k}]`,{
-                rules:[{required:true,message:'请输入院校名称'}]
+                rules:[
+                  {required:true,message:'请输入院校名称'},
+                  {max:20,message:"最多输入20个字符"}
+                ]
               })(
                 <Input placeholder="请输入院校名称"/>
               )}
@@ -235,7 +225,10 @@ class FormTow extends React.Component{
           <Col span={8}>
             <Form.Item>
               {getFieldDecorator(`rejiaoyuZy[${k}]`,{
-                rules:[{required:true,message:'请输入专业名称'}]
+                rules:[
+                  {required:true,message:'请输入专业名称'},
+                  {max:20,message:"最多输入20个字符"}
+                ]
               })(
                 <Input placeholder="请输入专业名称"/>
               )}
@@ -260,9 +253,12 @@ class FormTow extends React.Component{
           <Col span={24}>
             <Form.Item>
               {getFieldDecorator(`restudy[${k}]`,{
-                rules:[{required:true,message:'请填写个人经历'}]
+                rules:[
+                  {required:true,message:'请填写个人经历'},
+                  {max:150,message:'最多输入150个字符'},
+                ]
               })(
-                <TextArea rows={5} placeholder="请说明您的成就，如在校获奖经历，实践经历等（140字以内）"/>
+                <TextArea rows={5} placeholder="请说明您的成就，如在校获奖经历，实践经历等（150字以内）"/>
               )}
             </Form.Item>
           </Col>
@@ -321,30 +317,21 @@ class FormTow extends React.Component{
               <Icon className="mx-1" type="plus"/>添加工作经历
             </span>
           </h6>
-          <Col span={11}>
+          <Col span={24}>
             <Form.Item>
-              {getFieldDecorator("begin",{
-                rules:[{required:true,message:'请填写工作开始时间'}]
+              {getFieldDecorator('wokeTime', {
+                rules:[{required:true,message:'请选择时间'}]
               })(
-                <DatePicker style={inputwidth}  placeholder="请填写开始时间"/>
+                <RangePicker style={inputwidth} />
               )}
             </Form.Item>
           </Col>
-          <FormIcon/>
-          <Col span={11}>
-            <Form.Item>
-              {getFieldDecorator("end",{
-                rules:[{required:true,message:'请填写工作结束时间'}]
-              })(
-                <DatePicker style={inputwidth} placeholder="请填结束始时间"/>
-              )}
-            </Form.Item>
-          </Col>
-
           <Col span={11}>
             <Form.Item>
               {getFieldDecorator("company",{
-                rules:[{required:true,message:'请填写公司名称'}]
+                rules:[
+                  {required:true,message:'请填写公司名称'},
+                  {max:50,message:"最大输入50个字符"}]
               })(
                 <Input placeholder="请填写公司名称"/>
               )}
@@ -354,7 +341,9 @@ class FormTow extends React.Component{
           <Col span={11}>
             <Form.Item>
               {getFieldDecorator("job",{
-                rules:[{required:true,message:'请填写您的职位'}]
+                rules:[
+                  {required:true,message:'请填写您的职位'},
+                  {max:50,message:"最大输入50个字符"}]
               })(
                 <Input placeholder="请填写您的职位"/>
               )}
@@ -364,7 +353,10 @@ class FormTow extends React.Component{
           <Col span={24}>
             <Form.Item>
               {getFieldDecorator("des",{
-                rules:[{required:true,message:'请简要说明您的工作内容'}]
+                rules:[
+                  {required:true,message:'请简要说明您的工作内容'},
+                  {max:150,message:"最多输入150个字符"}
+                ]
               })(
                 <TextArea rows={5} placeholder="请简要说明您的工作内容"/>
               )}
@@ -375,7 +367,7 @@ class FormTow extends React.Component{
         资料上传
         <Row>
           <Col span={24}>
-            <FileUpload  fileOnChange={this.fileOnChange}/>
+            <ProjectFileUpload  onChange={this.fileOnChange}/>
           </Col>
         </Row>
         {/*教育经历时间*/}
@@ -388,23 +380,12 @@ class FormTow extends React.Component{
             </span>
           </h6>
           </Col>
-
-          <Col span={11}>
+          <Col span={24}>
             <Form.Item>
-              {getFieldDecorator("jiaoyuStart",{
-                rules:[{required:true,message:'请填写教育开始时间'}]
+              {getFieldDecorator('stuTime', {
+                rules:[{required:true,message:'请选择时间'}]
               })(
-                <DatePicker style={inputwidth}  placeholder="请填写教育开始时间"/>
-              )}
-            </Form.Item>
-          </Col>
-          <FormIcon/>
-          <Col span={11}>
-            <Form.Item>
-              {getFieldDecorator("jiaoyuEnd",{
-                rules:[{required:true,message:'请填教育结束始时间'}]
-              })(
-                <DatePicker style={inputwidth} placeholder="请填教育结束始时间"/>
+                <RangePicker style={inputwidth} />
               )}
             </Form.Item>
           </Col>
@@ -413,7 +394,10 @@ class FormTow extends React.Component{
           <Col span={8}>
             <Form.Item>
               {getFieldDecorator('jioayuYxm',{
-                rules:[{required:true,message:'请输入院校名称'}]
+                rules:[
+                  {required:true,message:'请输入院校名称'},
+                  {max:50,message:"最多输入50个字符"}
+                ]
               })(
                 <Input placeholder="请输入院校名称"/>
               )}
@@ -422,7 +406,10 @@ class FormTow extends React.Component{
           <Col span={8}>
             <Form.Item>
               {getFieldDecorator('jiaoyuZy',{
-                rules:[{required:true,message:'请输入专业名称'}]
+                rules:[
+                  {required:true,message:'请输入专业名称'},
+                  {max:20,message:"最多输入20个字符"}
+                ]
               })(
                 <Input placeholder="请输入专业名称"/>
               )}
@@ -447,9 +434,12 @@ class FormTow extends React.Component{
           <Col span={24}>
             <Form.Item>
               {getFieldDecorator("study",{
-                rules:[{required:true,message:'请填写个人经历'}]
+                rules:[
+                  {required:true,message:'请填写个人经历'},
+                  {max:150,message:"最多输入150个字符"}
+                  ]
               })(
-                <TextArea rows={5} placeholder="请说明您的成就，如在校获奖经历，实践经历等（140字以内）"/>
+                <TextArea rows={5} placeholder="请说明您的成就，如在校获奖经历，实践经历等（150字以内）"/>
               )}
             </Form.Item>
           </Col>
@@ -461,7 +451,10 @@ class FormTow extends React.Component{
           <Col span={24}>
             <Form.Item>
               {getFieldDecorator("self",{
-                rules:[{required:true,message:'请填写个人介绍'}]
+                rules:[
+                  {required:true,message:'请填写个人介绍'},
+                  {max:150,message:"最多输入150个字符"}
+                ]
               })(
                 <TextArea rows={5} placeholder="请填写让人印象深刻的成就经历，丰富个性化信息，提高接单竞争力！"/>
               )}

@@ -1,5 +1,5 @@
 import  React from 'react'
-import {Row, Col, Input, Button, InputNumber, Select, Form} from 'antd';
+import {Row, Col, Input, Button, InputNumber, Select, Form, message} from 'antd';
 import "../../css/userInfo.css";
 import axios from 'axios'
 import icon1 from "../../img/userPh.png";
@@ -23,7 +23,25 @@ this.charge = this.charge.bind(this)
     }
     charge(){
         const _chargeSuccess = "true"
-        this.props.handleCancel(_chargeSuccess)
+        const user_id_check = localStorage.getItem("hyquser_id")
+        const token_check = localStorage.getItem("hyqutoken")
+        const _that = this;
+        axios.post("/user/goods/goodspay",{
+            user_id_check: user_id_check,
+            token_check:token_check,
+            id:this.props.orderData.id ,
+        }).then(function(response){
+            if(response.data.res ==1){
+                message.info("支付成功")
+                _that.props.handleCancel(_chargeSuccess)
+
+            }else{
+                alert(response.data.err)
+            }
+        }).catch(function(error){
+            console.log(error)
+        })
+
     }
     componentDidMount(){
 

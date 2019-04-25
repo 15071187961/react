@@ -109,7 +109,7 @@ class UserInfoTabsOrder extends React.Component{
 
     }
     changeHref(){
-        window.location.href="/faburenwu"
+        window.location.href="/#/faburenwu"
     }
     searchOrderStatusClick(e){
         const _that = this

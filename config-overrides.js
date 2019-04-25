@@ -9,7 +9,9 @@ const { override, fixBabelImports, addLessLoader } = require('customize-cra');
    addLessLoader({
      javascriptEnabled: true,
      modifyVars: {
-       '@primary-color': '#fc7916'
+       '@primary-color': '#fc7916',
+       '@disabled-color':'#FCC25B',
+       '@text-color-secondary': '#808080'
      },
     }),
  );

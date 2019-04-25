@@ -1,12 +1,12 @@
 #loginwrap{
-    height: 1000px;
+    height: 900px;
     background-color: #ffffff;
     background-image: url('../img/wuhan.png');
     background-size: 100% 100%;
 }
 #login{
     width: 1000px;
-    height: 570px;
+    height: 468px;
     border-radius: 3px;
     border: 1px solid #eaeaea;
 

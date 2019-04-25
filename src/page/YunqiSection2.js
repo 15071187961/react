@@ -18,7 +18,6 @@ class YunqiSection2 extends  React.Component{
   componentDidMount(){
      const _that = this;
      axios.post("/index/goods/index",{
-
      }).then(function (response) {
         console.log(response)
        if(response.data.res ===1){

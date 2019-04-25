@@ -1,11 +1,10 @@
 .title{
-    font-size: 48px;
+    font-size: 32px !important;
 }
 @media screen and (max-width: 1560px) {
     .title {
-        font-size: 32px;
+        font-size: 21px;
     }
 }
 .projectLink:hover{box-shadow: 2px 2px 2px #f5f5f5}
 .ant-upload{width: 100%;border: 2px #eeeeee dashed;line-height: 4}
-.ant-input-group-addon{padding: 0 60px}

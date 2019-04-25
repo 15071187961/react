@@ -6,6 +6,7 @@ import icon2 from '../img/icon6.png'
 import icon3 from '../img/icon14.png'
 import icon4 from '../img/icon8.png'
 import icon5 from '../img/icon7.png'
+import BorderLineBlock from "./BorderLineBlock";
 
 class QiyeFour extends React.Component{
 
@@ -15,9 +16,7 @@ class QiyeFour extends React.Component{
         <div className="container">
           <div className="row">
             <div className="col-12 text-center d-flex justify-content-center align-items-center" style={{height:'155px'}}>
-              <div className="borderlineblock"></div>
-              <div className="fontSize32 mx-3 letter-spacing4">合作流程</div>
-              <div className="borderlineblock"></div>
+              <BorderLineBlock color="black" title="合作流程"/>
             </div>
           </div>
           <div className="row d-flex align-items-center flex-nowrap" style={{marginTop: "60px"}}>

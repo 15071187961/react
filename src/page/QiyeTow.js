@@ -3,6 +3,7 @@ import '../css/qiye.css'
 import icon1 from '../img/cion2.png'
 import icon2 from '../img/iocn3.png'
 import icon3 from '../img/icon1.png'
+import BorderLineBlock from "./BorderLineBlock";
 
 class QiyeTow extends React.Component{
   constructor(){
@@ -14,9 +15,7 @@ class QiyeTow extends React.Component{
         <div className="container">
           <div className="row">
             <div className="col-12 text-center d-flex justify-content-center align-items-center" style={{height:'155px'}}>
-              <div className="borderlineblock"></div>
-              <div className="fontSize32 mx-3 letter-spacing4">平台优势</div>
-              <div className="borderlineblock"></div>
+              <BorderLineBlock color="black" title="平台优势"/>
             </div>
             <div className="col-4 d-flex flex-column justify-content-between align-items-center">
               <div className="bg-white qiyetwoimg">

@@ -27,11 +27,13 @@ class PiPeiRenYuan extends React.Component{
         Object.assign(this.state,this.props)
     }
     querenyanshou(e){
-          console.log("querenyanshou")
-        console.log(e)
         const user_id_check = localStorage.getItem("hyquser_id")
         const token_check = localStorage.getItem("hyqutoken")
         const id = e.id;
+        const _googsId = this.props.orderData.id
+        console.log("e.id")
+        console.log(e.id)
+        console.log(_googsId)
           const _that =this;
         axios.post("/user/goods/pay",{
             user_id_check: user_id_check,
@@ -40,13 +42,39 @@ class PiPeiRenYuan extends React.Component{
             price:e.price,
         }).then(function(response){
                if(response.data.res ==1){
-                   for(let m=0;m<_that.state.data.length;m++){
-                       if(_that.state.data[m].id=id){
-                           _that.state.data[m].ok ="已完结"
+                   axios.post("/user/goods/index",{
+                       user_id_check: user_id_check,
+                       token_check:token_check,
+                   }).then(function(response){
+                       console.log("response")
+                       console.log(response.data.data.data);
+                       const _data = response.data.data.data
+                       if(response.data.res ==1){
+                           axios.post("/user/goods/index",{
+                               user_id_check: user_id_check,
+                               token_check:token_check,
+                           }).then(function(response){
+                               const _goodsdata = response.data.data.data
+                               if(response.data.res ==1){
+                                   for(let k=0;k<_goodsdata.length;k++){
+                                       if(_goodsdata[k].id==_googsId){
+                                           _that.setState({
+                                               data :_goodsdata[k]["order_id_ok"]
+                                           })
+                                       }
+                                   }
+
+                               }else{
+                                   alert(response.data.err)
+                               }
+                           }).catch(function(error){
+                               console.log(error)
+                           })
+                       }else{
+                           alert(response.data.err)
                        }
-                   }
-                   _that.setState({
-                       data :_that.state.data
+                   }).catch(function(error){
+                       console.log(error)
                    })
                }else{
                    alert(response.data.err)
@@ -66,14 +94,9 @@ class PiPeiRenYuan extends React.Component{
             data:this.state.data,
             isShowBtn:true
         })
-
-
     }
     start(){
         this.setState({ loading: true });
-
-
-
         // ajax request after empty completing
         setTimeout(() => {
             this.setState({
@@ -112,18 +135,9 @@ class PiPeiRenYuan extends React.Component{
           console.log(response.data.data.data)
           if(response.data.res == 1){
               const _data = response.data.data.data;
-
               for(let i=0;i<_data.length;i++){
-                  console.log(_that.props.orderData.id)
-                  console.log(_data[i].id)
                   if(_data[i].id ==_that.props.orderData.id){
                       const _DATA = _data[i].order_id_ok
-                      console.log("_DATA")
-                      console.log(_DATA)
-                      for(let j=0;j<_DATA.length;j++){
-                          _DATA[j].selectedFile = {}
-                      }
-
                       _that.setState({
                           data:_DATA
                       })
@@ -171,7 +185,7 @@ class PiPeiRenYuan extends React.Component{
                             const _that = this
                             var str = []
                             _href.map(function(key,index){
-                                const href = "http://www.huiqiyun.com"+key
+                                const href = key
                                 const className = "mr-1 text-warning"
                                 const target ="_blank"
                                 const title = "图"+index
@@ -187,8 +201,10 @@ class PiPeiRenYuan extends React.Component{
                         title="操作"
                         dataIndex="id"
                         render={(text,record)=>(
+
                             <span>
-                                {record.ok=="已完结"?<a href={"http://www.huiqiyun.com"+record.source} target="_blank" className="tableBtn fontSize14">下载源文件</a>:<a href="javascript:;" value="3432" className="tableBtn fontSize14" onClick={()=>{this.querenyanshou(record)}}>确认验收</a>}
+
+                                {record.ok=="已完结"?(record.state=="锁定"?<a href={record.source} target="_blank" className="tableBtn fontSize14">下载源文件</a>:<a href="javascript:;" value="3432" className="tableBtn fontSize14" onClick={()=>{this.querenyanshou(record)}}>确认验收</a>):""}
                             </span>
                             )}
 

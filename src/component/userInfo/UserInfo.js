@@ -45,12 +45,18 @@ class UserInfo extends React.Component{
       console.log(response)
       if(response.data.res === 1){
         console.log("用户认证成功")
+          console.log(response.data.data)
+          if(response.data.data.usertype=="未知"){
+              localStorage.removeItem("hyquser_id");
+              localStorage.removeItem("hyqutoken")
+              window.location.href="/#/Register"
+          }
         _that.setState({userdata: response.data.data})
       }else{
         alert(response.data.err)
         localStorage.removeItem("hyquser_id");
         localStorage.removeItem("hyqutoken")
-        window.location.href="/smslogin"
+        window.location.href="/#/smslogin"
       }
     }).catch(function (err) {
       alert(err)

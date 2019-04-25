@@ -27,12 +27,40 @@ class RegisterStep2 extends React.Component{
     handleReback(event) {
         console.log("ni")
 
-        window.location.href="/qiye"
+        window.location.href="/#/qiye"
     }
     handleTagUserInfor(event) {
-        console.log("wowwo")
+        const userid = localStorage.getItem("hyquser_id")
+        const usertoken = localStorage.getItem("hyqutoken")
+        const _that = this
+        axios.post("/user/info/info",{
+            user_id_check:userid,
+            token_check:usertoken
+        }).then(function (response) {
+            console.log(response)
+            if(response.data.res === 1){
 
-        window.location.href="/userinfo"
+                if(response.data.data.usertype=="企业用户"){
+                    window.location.href="/#/userinfo"
+
+                }else if(response.data.data.usertype=="个人用户"){
+                    window.location.href="/#/UserInfo"
+                }else{
+                    localStorage.removeItem("hyquser_id");
+                    localStorage.removeItem("hyqutoken")
+                    window.location.href="/#/Register"
+                }
+
+            }else{
+                alert(response.data.err)
+                localStorage.removeItem("hyquser_id");
+                localStorage.removeItem("hyqutoken")
+                window.location.href="/#/smslogin"
+            }
+        }).catch(function (err) {
+            alert(err)
+        })
+
     }
     render() {
         return (

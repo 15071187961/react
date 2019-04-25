@@ -1,6 +1,7 @@
 import React from 'react'
 import {Form,Row,Col,Icon,Select,Input,Button} from 'antd';
 import FileUpload from "../../page/FileUpload";
+import ProjectFileUpload from "../project/ProjectFileUpload";
 const Option = Select.Option;
 const { TextArea } = Input;
 let id = 0
@@ -126,7 +127,10 @@ class FormThree extends React.Component{
           <div>技能描述</div>
           <Form.Item>
             {getFieldDecorator(`reskillName[${k}]`,{
-              rules:[{required:true,message:"填写单个技能名称"}]
+              rules:[
+                {required:true,message:"填写单个技能名称"},
+                {max:20,message:"最多输入20个字符"}
+              ]
             })(
               <Input plaecholder="填写单个技能名称"/>
             )}
@@ -164,7 +168,12 @@ class FormThree extends React.Component{
         <Col span={11}>
           <div>工作名称</div>
           <Form.Item>
-            {getFieldDecorator(`reprojectName[$[k]`)(
+            {getFieldDecorator(`reprojectName[$[k]`,{
+              rules:[
+                {required:true,message:"请填写公众名称"},
+                {max:50,message:"最多输入50个字符"},
+                ]
+            })(
               <Input placeholder="50字以内"/>
             )}
           </Form.Item>
@@ -173,7 +182,9 @@ class FormThree extends React.Component{
         <Col span={11}>
           <div>行业类型</div>
           <Form.Item>
-            {getFieldDecorator(`reprojectType[${k}]`)(
+            {getFieldDecorator(`reprojectType[${k}]`,{
+              rules:[{required:true,message:'请选择'}]
+            })(
               <Select placeholder="行业类型">
                 <Option value="物流运输">物流运输</Option>
                 <Option value="建筑">建筑</Option>
@@ -186,7 +197,9 @@ class FormThree extends React.Component{
         <Col span={11}>
           <div>工作链接</div>
           <Form.Item>
-            {getFieldDecorator(`reprojectLink[${k}]`)(
+            {getFieldDecorator(`reprojectLink[${k}]`,{
+              rules:[{max:50,message:"最多输入50个字符"}]
+            })(
               <Input placeholder="例如：http：//"/>
             )}
           </Form.Item>
@@ -195,7 +208,9 @@ class FormThree extends React.Component{
         <Col span={11}>
           <div>关键功能</div>
           <Form.Item>
-            {getFieldDecorator(`reprojectGongneng[${k}]`)(
+            {getFieldDecorator(`reprojectGongneng[${k}]`,{
+              rules:[{required:true,message:'请选择'}]
+            })(
               <Select placeholder="关键功能">
                 <Option value="物流运输">物流运输</Option>
                 <Option value="建筑">建筑</Option>
@@ -208,7 +223,13 @@ class FormThree extends React.Component{
         <Col span={24}>
           <div>工作简介</div>
           <Form.Item>
-            {getFieldDecorator(`reprojectDes[${k}]`)(
+            {getFieldDecorator(`reprojectDes[${k}]`, {
+                rules: [
+                  {required: true, message: '请填写公做简历'},
+                  {max: 150, message: '最多输入150个字符'}
+                ]
+              }
+            )(
               <TextArea rows={5} placeholder={"请描述工作主要内容，帮助解决的问题。"}/>
             )}
           </Form.Item>
@@ -216,7 +237,12 @@ class FormThree extends React.Component{
         <Col span={24}>
           <div>工作职责</div>
           <Form.Item>
-            {getFieldDecorator(`projectDesTow[${k}]`)(
+            {getFieldDecorator(`projectDesTow[${k}]`,{
+              rules:[
+                {required:true,message:"请填写公众职责"},
+                {max:150,message:"最多输入150个字符"},
+              ]
+            })(
               <TextArea rows={5} placeholder={"请描述工作主要内容，帮助解决的问题。"}/>
             )}
           </Form.Item>
@@ -236,7 +262,7 @@ class FormThree extends React.Component{
             <div>技能描述</div>
             <Form.Item>
               {getFieldDecorator("skillName",{
-                rules:[{required:true,message:'填写单个技能名称'}]
+                rules:[{required:true,message:'填写单个技能名称'},{max:50,message:"最对输入50个字符"}]
               })(
                 <Input plaecholder="填写单个技能名称"/>
               )}
@@ -272,7 +298,7 @@ class FormThree extends React.Component{
             <div>工作名称</div>
             <Form.Item>
               {getFieldDecorator("projectName",{
-                rules:[{required:true,message:'请填写项目名称'}]
+                rules:[{required:true,message:'请填写项目名称'},{max:50,message:"最对输入50个字符"}]
               })(
                 <Input placeholder="50字以内"/>
               )}
@@ -297,7 +323,9 @@ class FormThree extends React.Component{
           <Col span={11}>
             <div>工作链接</div>
             <Form.Item>
-              {getFieldDecorator("projectLink")(
+              {getFieldDecorator("projectLink",{
+                rules:[{max:50,message:"最对输入50个字符"}]
+              })(
                 <Input placeholder="例如：http：//"/>
               )}
             </Form.Item>
@@ -322,7 +350,7 @@ class FormThree extends React.Component{
             <div>工作简介</div>
             <Form.Item>
               {getFieldDecorator("projectDes",{
-                rules:[{required:true,message:'请描述工作主要内容'}]
+                rules:[{required:true,message:'请描述工作主要内容'},{max:150,message:"最对输入150个字符"}]
               })(
                 <TextArea rows={5} placeholder={"请描述工作主要内容，帮助解决的问题。"}/>
               )}
@@ -332,7 +360,7 @@ class FormThree extends React.Component{
             <div>工作职责</div>
             <Form.Item>
               {getFieldDecorator("projectZhize",{
-                rules:[{required:true,message:'请描述工作主要内容'}]
+                rules:[{required:true,message:'请描述工作主要内容'},{max:150,message:"最对输入150个字符"}]
               })(
                 <TextArea rows={5} placeholder={"请描述工作主要内容，帮助解决的问题。"}/>
               )}
@@ -340,9 +368,10 @@ class FormThree extends React.Component{
           </Col>
         </Row>
         {projectList}
+        <div>资料上传</div>
         <Row>
           <Col span={24}>
-            <FileUpload fileOnChange={this.fileOnChange}/>
+            <ProjectFileUpload onChange={this.fileOnChange}/>
           </Col>
         </Row>
         <Row>

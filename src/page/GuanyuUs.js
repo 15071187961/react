@@ -20,7 +20,7 @@ class GuanyuUs extends React.Component{
   render() {
     return(
       <div className="container-fluid p-0 " style={{height:"775",marginBottom:"130px"}}>
-        <BorderLineBlock title="公司活动"/>
+        <BorderLineBlock color="black" title="公司活动"/>
         <div className="container">
           <div className="row d-flex justify-content-between">
             <div style={{width: "300px"}}>

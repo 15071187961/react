@@ -2,7 +2,6 @@ import React from 'react'
 import { message } from 'antd'
 import { InputNumber,Input,Form, DatePicker, Modal } from 'antd';
 import axios from 'axios'
-
 import '../../css/xuqiu.css'
 import BorderShadowWrap from "../BorderShadowWrap";
 import moment from 'moment';
@@ -24,7 +23,8 @@ class FaBuRenWu extends React.Component{
             timeb:"",
             timee:"",
             des:"",
-            visible:false
+            visible:false,
+            endOpen: false,
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.companyNameChange = this.companyNameChange.bind(this)
@@ -40,8 +40,83 @@ class FaBuRenWu extends React.Component{
         this.onEndTimeChange = this.onEndTimeChange.bind(this)
         this.handleOk = this.handleOk.bind(this)
         this.handleCancel = this.handleCancel.bind(this)
+
     }
+/**/
+   /* range(start, end) {
+        const result = [];
+        for (let i = start; i < end; i++) {
+            result.push(i);
+        }
+        return result;
+    }*/
+
+
+    disabledDateTime() {
+       /* return {
+            disabledHours: () => this.range(0, 24).splice(4, 20),
+            disabledMinutes: () => this.range(30, 60),
+            disabledSeconds: () => [55, 56],
+        };*/
+    }
+/*
+* */
+    disabledDate(current) {
+        // Can not select days before today and today
+        console.log("current")
+        console.log(current)
+        console.log(moment().endOf('day'))
+        return current && current <= moment().startOf('day');
+    }
+    disabledStartDate = (startValue) => {
+        const endValue = this.state.timee;
+        if (!startValue || !endValue) {
+            return false;
+        }
+        return startValue.valueOf() > endValue.valueOf();
+    }
+
+    disabledEndDate = (endValue) => {
+        const startValue = this.state.timeb;
+        if (!endValue || !startValue) {
+            return false;
+        }
+        return endValue.valueOf() <= startValue.valueOf();
+    }
+
+    onChange = (field, value) => {
+        this.setState({
+            [field]: value,
+        });
+    }
+
+    onStartChange = (value) => {
+        console.log(value)
+        this.onChange('timeb', value);
+    }
+
+    onEndChange = (value) => {
+        this.onChange('timee', value);
+    }
+
+    handleStartOpenChange = (open) => {
+        if (!open) {
+            this.setState({ endOpen: true });
+        }
+    }
+
+    handleEndOpenChange = (open) => {
+        this.setState({ endOpen: open });
+    }
+
+
+
+
+
     onStartTimeChange(dates, dateStrings) {
+        console.log("onStartTimeChange")
+        console.log(dates)
+        console.log()
         const timebNum = new Date(dateStrings).getTime()
         this.setState({
             timeb:dateStrings
@@ -102,12 +177,21 @@ class FaBuRenWu extends React.Component{
         this.setState({
             visible: false,
         });
-         window.location.href=`/userinfo`
+        window.location.href="/#/userinfo"
     }
     handleCancel(e){
         console.log(e);
         this.setState({
-            visible: false,
+            title:"",
+            titletype:"",
+            price:"",
+            pricetype:"",
+            address:"",
+            timeb:"",
+            timee:"",
+            des:"",
+            visible:false,
+            endOpen: false,
         });
 
     }
@@ -140,7 +224,8 @@ class FaBuRenWu extends React.Component{
         const titletype = this.state.titletype
         const pricetype = this.state.pricetype
         const fileList = this.state.fileList;
-        const type = this.state.type
+        const type = this.state.type;
+        const { startValue, endValue, endOpen } = this.state;
         return (
             <div>
                 <BorderShadowWrap title={'任务发布'}>
@@ -178,7 +263,7 @@ class FaBuRenWu extends React.Component{
                             <span className="fontSize18">项目金额</span>
                         </p>
                         <div className="input-group d-flex align-items-center pl-4 mb-5">
-                            <InputNumber min={1}  className="form-control" size="large" placeholder="请输入您的项目金额" onChange={this.priceChange}/>
+                            <InputNumber min={1}  className="form-control" size="large" value={this.state.price} placeholder="请输入您的项目金额" onChange={this.priceChange}/>
                             <div className="input-group-append">
                                 <div className="custom-radio custom-control mx-3">
 
@@ -211,22 +296,35 @@ class FaBuRenWu extends React.Component{
                             <span className="fontSize18">工作时间</span>
                         </p>
                         <div className="input-group pl-4 d-flex justify-content-between align-content-center">
+                          {/*  <DatePicker
+                                format="YYYY-MM-DD HH:mm:ss"
 
+                                disabledTime={this.disabledDateTime.bind(this)}
+                                showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
+                            />*/}
                             <DatePicker
+                                disabledDate={this.disabledStartDate.bind(this)}
+                                disabledDate={this.disabledDate.bind(this)}
                                 showTime
                                 size="large"
-                                placeholder="选择开始时间"
-                                onChange={this.onStartTimeChange}
-                                onOk={this.onOk}
+                                format="YYYY-MM-DD HH:mm:ss"
+                                value={this.state.timeb}
+                                placeholder="选择结束时间"
+                                onChange={this.onStartChange}
+                                onOpenChange={this.handleStartOpenChange}
                                 style={{width:"46%"}}
                             />
                             ~
                             <DatePicker
+                                disabledDate={this.disabledEndDate}
                                 showTime
-                                size="large"
+                                format="YYYY-MM-DD HH:mm:ss"
+                                value={this.state.timee}
                                 placeholder="选择结束时间"
-                                onChange={this.onEndTimeChange}
-                                onOk={this.onOk}
+                                onChange={this.onEndChange}
+                                open={this.state.endOpen}
+                                onOpenChange={this.handleEndOpenChange}
+                                size="large"
                                 style={{width:"46%"}}
                             />
                         </div>

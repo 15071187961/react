@@ -1,14 +1,41 @@
 import  React from 'react'
+import axios from 'axios'
 import '../css/yunduan.css'
-import SecondTitle from "./SecondTitle";
 import icon1 from '../img/yuanduanIcon01.png'
 import icon2 from '../img/yuanduanIcon02.png'
 import icon3 from '../img/yuanduanIcon03.png'
+import isLogin from "../component/IsLogin";
 
 class YunduanOne extends React.Component{
-    constructor(){
-        super()
+  componentWillMount(){
+    const _that=this
+    if(isLogin()){
+      const userid = localStorage.getItem("hyquser_id")
+      const usertoken = localStorage.getItem("hyqutoken")
+      if(userid && usertoken){
+        axios.post("/user/info/info",{
+          user_id_check:userid,
+          token_check:usertoken
+        }).then(function (response) {
+          _that.setState({userInfo:response.data.data})
+        }).catch(function (err) {
+          alert(err)
+        })
+      }
+      _that.setState({userid: userid,usertoken:usertoken});
     }
+  }
+  handleFabu = () => {
+    if(!this.state.userInfo){
+      alert("您还没有登录，请先登录")
+    }
+    if(this.state.userInfo.usertype === "个人用户"){
+      alert("您是个人用户不能发布需求")
+    }
+    if(this.state.userInfo.usertype === "企业用户"){
+      window.location.href="/userinfo"
+    }
+  }
     render() {
         return (
             <div className="container-fluid">

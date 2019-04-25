@@ -2,11 +2,12 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 import LoginWrap from "./LoginWrap";
 import RegisterNav from './RegisterNav'
-import { Steps,Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete,} from 'antd';
+import { Steps,Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, Radio } from 'antd';
 import axios from 'axios';
 import '../css/Register.css'
 const Step = Steps.Step;
 const Search = Input.Search;
+const RadioGroup = Radio.Group;
 
 
 
@@ -18,7 +19,8 @@ class Register extends React.Component{
       smscode:'',
       getsmscode:true,
       tiemout:0,
-        step:"0"
+        step:"0",
+        value:1
     };
     this.handleChange = this.handleChange.bind(this);
     this.smscodeChange = this.smscodeChange.bind(this)
@@ -47,6 +49,12 @@ class Register extends React.Component{
   componentDidMount() {
 
   }
+    onRadioChange(e){
+
+        this.setState({
+            value: e.target.value,
+        });
+    }
   tick() {
     if(this.state.tiemout === 0){
       clearInterval(this.interval);
@@ -79,7 +87,8 @@ class Register extends React.Component{
    // this.props.history.push('/')
     axios.post('index/api/loginphone',{
       phone:this.state.phone,
-      smscode:this.state.smscode
+      smscode:this.state.smscode,
+        usertype:this.state.value
     }).then(function (response) {
       console.log(response)
       if(response.data.res === 1 ){
@@ -87,7 +96,7 @@ class Register extends React.Component{
         const usertoken = response.data.data.token
         localStorage.setItem('hyquser_id',user_id)
         localStorage.setItem('hyqutoken',usertoken)
-        window.location.href="/register2"
+        window.location.href="/#/register2"
       }else{
         alert(response.data.err)
       }
@@ -137,7 +146,17 @@ class Register extends React.Component{
                          onChange={this.getsmscode}
                      />
                  </Form.Item>
+                 <Form.Item
+                     label=""
+                     className="d-flex align-items-center justify-content-center"
+                 >
 
+                     <RadioGroup onChange={this.onRadioChange.bind(this)} value={this.state.value}>
+                         <Radio value={1}>个人用户</Radio>
+                         <Radio value={2}>企业用户</Radio>
+
+                     </RadioGroup>
+                 </Form.Item>
                  <div className="form-group mb-5 mt-5 d-flex align-items-center justify-content-center">
                      <input type="submit" className="btn btn-block bg-warning fontSize16 text-white rounded"  style={{height:"35px",width:"100px"}}
                             disabled={this.state.getsmscode} value="下一步"/>

@@ -27,7 +27,6 @@ class Contract extends  React.Component{
       user_id_check:user_id_check,
       token_check:token_check
     }).then(function (reopsonse) {
-      console.log('获取用户数据成功')
       if(reopsonse.data.res === 1){
         _that.setState({userInfo:reopsonse.data.data})
       }
@@ -84,8 +83,8 @@ class Contract extends  React.Component{
       jtype:_that.state.formOne.workDay.join(','),
       job:_that.state.formTow.pationFangxiang,
       jobname:_that.state.formTow.pationJob,
-      jtime:[_that.state.formOne.startTime,_that.state.formOne.endTime].join(','),
-      timelong:_that.state.formOne.endTime.weekWorkTime,
+      jtime:[_that.state.formOne.workTime[0],_that.state.formOne.workTime[1]].join(','),
+      timelong:_that.state.formOne.weekWorkTime,
       jobarea:_that.state.formOne.workScope,
       jobaddress:_that.state.formOne.address.join(","),
       money:_that.state.formOne.price
@@ -127,8 +126,9 @@ class Contract extends  React.Component{
     }else if(current === 3){
       step=  <ContraclFour/>
     }
+    const Title = (<h3>申请签约订单</h3>)
     return (
-      <BorderShadowWrap title="申请签约订单">
+      <BorderShadowWrap title={Title}>
         <Row className="d-flex justify-content-center">
           <Col span={20} >
             <Steps size="samll" current={current}>

@@ -9,12 +9,12 @@ class YunQiProjectLink  extends  React.Component{
         <Link to={`/project/${data.id}`} className="p-3 bg-white d-block">
           <div className="my-2"><span className="iconfont icon-iconfonticonshutiao1" style={{marginLeft:"-5px"}}></span>{data.title}</div>
           <div className="fontSize20">{data.type}</div>
-          <div className="my-2">>
-            <span>{data.piao}</span>
+          <div className="my-2">
+            <span>{data.titletype}</span>
             <span className="px-2">|</span>
-            <span>{data.user_id}</span>
+            <span>{data.address}</span>
             <span className="px-2">|</span>
-            <span>{data.id}</span>
+            <span>{data.show}</span>
           </div>
           <div className="d-flex justify-content-between mt-2">
             <div className="m-0"><strong className="fontSize18 text-warning">{data.price}</strong>元/月</div>

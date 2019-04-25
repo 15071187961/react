@@ -12,7 +12,7 @@ class LoginCompoent extends React.Component{
     this.state={userid:'',usertoken:''}
     this.loginOut = this.loginOut.bind(this)
   }
-  componentDidMount(){
+  componentWillMount(){
     const _that=this
     if(isLogin()){
       const userid = localStorage.getItem("hyquser_id")
@@ -23,17 +23,12 @@ class LoginCompoent extends React.Component{
           token_check:usertoken
         }).then(function (response) {
           _that.setState({userInfo:response.data.data})
-          localStorage.setItem("USER_INFO_DATA",JSON.stringify(response.data.data))
-
         }).catch(function (err) {
           alert(err)
         })
       }
-
-
       _that.setState({userid: userid,usertoken:usertoken});
     }
-
   }
   loginOut(){
     const userid = localStorage.getItem("hyquser_id")
@@ -61,24 +56,33 @@ class LoginCompoent extends React.Component{
   }
   render(){
       const {userid,userInfo} = this.state
-
       if(userid && userInfo){
         return(
-          <div>
-            <span>欢迎</span><span className="px-1">|</span>
-            {userInfo.usertype =="个人用户"
-              ? <Link to={`/userself/${userid}`} className="text-white ">个人中心</Link>
-              :<Link to={`/userinfo/${userid}`} className="text-white ">个人中心</Link>}
-             <span className="px-1">|</span>
-            <span to="" onClick={this.loginOut} style={{cursor: "pointer"}}>退出登录</span>
+          <div className="row d-flex justify-content-end">
+            <div className="col-8 justify-content-between  d-flex">
+              <span>欢迎</span><span className="px-1">|</span>
+              {userInfo.usertype =="个人用户"
+                ? <Link to={`/userself/${userid}`} className="text-white ">个人中心</Link>
+                :<Link to={`/userinfo/${userid}`} className="text-white ">个人中心</Link>}
+              <span className="px-1">|</span>
+              <span to="" onClick={this.loginOut} style={{cursor: "pointer"}}>退出登录</span>
+              <span className="px-1">|</span>
+              <span>热线电话：233-233-3333</span>
+            </div>
           </div>
         )
       }else {
         return (
-          <div >
-            <NavLink to="/pwdlogin" className="text-white px-4" activeClassName='headtopactive' >登陆</NavLink>
-            <NavLink to="/register"  className="text-white"  activeClassName='headtopactive'>注册</NavLink>
+          <div className="row d-flex justify-content-end">
+            <div className="col-7 justify-content-between  d-flex">
+              <Link to="/pwdlogin" className="text-white "  >登录</Link>
+              <span className="px-1">|</span>
+              <Link to="/register"  className="text-white"  >注册</Link>
+              <span className="px-1">|</span>
+              <span>热线电话：233-233-3333</span>
+            </div>
           </div>
+
         )
       }
   }

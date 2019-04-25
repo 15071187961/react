@@ -1,23 +1,27 @@
 import  React from 'react'
 import '../css/qiye.css'
 import FabuBtn from "./FabuBtn";
-import Title from "./Title";
-import SecondTitle from "./SecondTitle";
-import PageBanner from "./PageBanner";
+import bannerImg from "../img/bg-lp.jpg";
+import {Banner, FirstLevelTitle, TowLevelTitle} from "../component/BaseComponents";
 
 class QiyeOne extends React.Component{
     constructor(){
       super()
     }
+
     render() {
       return (
-        <PageBanner>
-          <Title title="按时聘用尖端人才，最快一天到岗"/>
-          <SecondTitle title="帮助大量中小型企业快速补充优质人才"/>
-          <div className="d-flex justify-content-center">
-            <FabuBtn link="/xq" linktitle="需求发布" />
+        <Banner bannerImg={bannerImg}>
+          <FirstLevelTitle  className="pb-3" title="惠企云一站式综合服务平台"/>
+          <TowLevelTitle  className=" mb-5" title="推动共享经济发展 · 缔造自由职业者新工坊"/>
+          <div className="container">
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <FabuBtn linktitle="发布需求"/>
+              </div>
+            </div>
           </div>
-        </PageBanner>
+        </Banner>
       );
     }
 }

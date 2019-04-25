@@ -4,6 +4,7 @@ import {options} from './Option'
 import FormIcon from "./FormIcon";
 const RadioGroup = Radio.Group
 const CheckboxGroup = Checkbox.Group;
+const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const plainOptions  = [
   { label: '工作日', value: '工作日' },
   { label: '周末', value: '周末' },
@@ -24,10 +25,10 @@ class FormOne extends React.Component{
     const _that=this
     this.props.form.validateFields((err,feidsValues)=>{
       if(!err){
+        console.log(feidsValues['workTime'])
         const data={
           ...feidsValues,
-          startTime:feidsValues['startTime'].format('HH:mm'),
-          endTime:feidsValues['endTime'].format('HH:mm'),
+          workTime:feidsValues.workTime.map(value => value.format("YYYY-MM-DD"))
         }
         _that.props.submitFormOne(data)
         _that.props.next(1)
@@ -37,9 +38,6 @@ class FormOne extends React.Component{
   render() {
     const inputwidth={width:"100%"}
     const {getFieldDecorator} = this.props.form
-    const config={
-      rules: [{type:'object',required: true,message:"请选择时间"}]
-    }
     return (
       <Form onSubmit={this.handleSubmit}>
         <Row className="my-3">
@@ -51,18 +49,12 @@ class FormOne extends React.Component{
               <CheckboxGroup options={plainOptions}/>
             )}
           </Form.Item>
-          <Col span={11}>
+          <Col span={24}>
             <Form.Item>
-              {getFieldDecorator('startTime', config)(
-                <TimePicker style={inputwidth} placeholder="选择开始日期" format={format}/>
-              )}
-            </Form.Item>
-          </Col>
-          <FormIcon/>
-          <Col span={11}>
-            <Form.Item>
-              {getFieldDecorator("endTime",config)(
-                <TimePicker placeholder="选择开始日期" style={inputwidth} format={format}/>
+              {getFieldDecorator('workTime', {
+                rules:[{required:true,message:'请选择时间'}]
+              })(
+                <RangePicker style={inputwidth} />
               )}
             </Form.Item>
           </Col>
@@ -120,9 +112,11 @@ class FormOne extends React.Component{
           <Col span={20}>
             <Form.Item>
               {getFieldDecorator('price',{
-                rules: [{required: true,message: "请填写日薪"}]
+                rules: [
+                  {required: true,message: "请填写日薪"},
+                  ]
               })(
-                <InputNumber style={inputwidth} min={1}/>
+                <InputNumber style={inputwidth} min={1} max={999999999}/>
               )}
             </Form.Item>
           </Col>

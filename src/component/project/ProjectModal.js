@@ -75,9 +75,8 @@ class ProjectModal extends  React.Component{
         msg:values.msg,
         file:filelist.join(",")
       }).then(function (response) {
-        console.log(response);
         if(response.res == 0){
-          alert(response.data)
+          message.error(response.data)
         }else{
           message.success(response.data.err)
         }

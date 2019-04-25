@@ -1,25 +1,28 @@
 import  React from 'react'
-import PageBanner from "./PageBanner";
-import Title from "./Title";
-import SecondTitle from "./SecondTitle";
 import SmallTitle from "./SmallTitle";
 import FabuBtn from "./FabuBtn";
 import YunduanOne from "./YunduanOne";
 import YunduanTwo from "./YunduanTwo";
 import YunduanThree from "./YunduanThree";
 import BorderLineBlock from "./BorderLineBlock";
+import bannerImg from "../img/3.jpg";
+import {Banner, FirstLevelTitle, TowLevelTitle} from "../component/BaseComponents";
 
 class Yunduan extends React.Component{
   render() {
     return(
       <div>
-        <PageBanner>
-          <Title title="按时聘用尖端人才，最快一天到岗"/>
-          <SecondTitle title="帮助大量中小型企业快速补充优质人才"/>
-          <div className="d-flex justify-content-center">
-            <FabuBtn link="/xq" linktitle="发布需求"/>
+        <Banner bannerImg={bannerImg}>
+          <FirstLevelTitle  className="pb-3" title="按时聘用尖端人才，最快一天到岗"/>
+          <TowLevelTitle  className=" mb-5" title="帮助大量中小型企业快速补充优质人才"/>
+          <div className="container">
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <FabuBtn linktitle="发布需求"/>
+              </div>
+            </div>
           </div>
-        </PageBanner>
+        </Banner>
         <BorderLineBlock title="高效的优质员工招聘决绝方案"/>
           <SmallTitle title="按需灵活用工、大幅节省招聘、用人成本"/>
          <YunduanOne />

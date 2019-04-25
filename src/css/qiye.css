@@ -2,7 +2,7 @@
 #banner-lp
 #to{height: 70px;font-size: 28px}
 @media screen and (max-width: 1560px) {
-    #banner-lp{width: 100%;height: 675px;padding: 227px 0;background-image: url("../img/bg-lp.jpg")}
+    #banner-lp{width: 100%;height: 600px;padding: 227px 0;background-image: url("../img/bg-lp.jpg")}
     #banner-lp h1{font-size: 32px;}
     #banner-lp p{font-size: 22px}
     #to{height: 50px !important;font-size: 20px !important;}
@@ -21,4 +21,4 @@
     transform:rotate(45deg);
     background-color:#ff9709;
 }
-.qiyefourimg{width: 140px;height: 140px}
+.qiyefourimg{width: 120px;height: 120px}

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { HashRouter as Router,Route,} from "react-router-dom";
 import Header from './component/Header';
 import Foot from './component/Foot';
 import Register from './component/Register'
@@ -26,12 +26,9 @@ import Contract from "./component/contract/Contract";
 import UserSelfInfo from './component/userSelfinfo/UserSelfInfo'
 import UserOrderInfo from "./component/userSelfinfo/UserOrderInfo";
 
-
-
-
 function App() {
   return (
-    <Router>
+    <Router >
       <Header />
       <div>
         <Route exact path="/" component={IndexContent} />

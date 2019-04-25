@@ -1,32 +1,38 @@
 import React from 'react'
 import {Row,Col,Form,Input} from 'antd'
-import bgimg from '../img/_501043111_banner.jpg'
+import {Banner, FirstLevelTitle, TowLevelTitle} from "../component/BaseComponents";
+import bannerImg from "../img/_501043111_banner.jpg";
+import FabuBtn from "./FabuBtn";
 const Search= Input.Search;
-const imgstyle={
-  height:"500px",backgroundImage:"url("+bgimg+")",
-  backgroundAttachment:"fixed",
-  backgroundPosition:"bottom"
-}
 class YunqiSection1 extends React.Component{
   render() {
     return (
-      <div className="container-fluid bg-orgin" style={imgstyle}>
+      <Banner bannerImg={bannerImg}>
         <div className="container">
           <Row gutter={0} style={{paddingTop:"35px"}}>
             <Col  style={{fontSize:"100px"}} span={24} className="text-white">
-              <span>好工作</span>
-              <span style={{fontSize:"100px"}} className="iconfont icon-dian"> </span>
-              <span>选择多</span>
-              <span style={{fontSize:"100px"}} className="iconfont icon-dian"> </span>
-              <span>上手快</span>
+              <div  className="d-flex align-items-center justify-content-between" >
+                <span>好工作</span>
+                <span style={{fontSize:"65px"}} className="mx-2">●</span>
+                <span>选择多</span>
+                <span style={{fontSize:"65px"}} className="mx-2">●</span>
+                <span>上手快</span>
+              </div>
             </Col>
             <Form>
-              <Search className="my-3"
-                      placeholder="传单派发"
-                      enterButton="搜索"
-                      size="large"
-                      onSearch={value => console.log(value)}
-              />
+              <Row>
+                <Col  span={24}>
+                  <div className="d-flex justify-content-center">
+                    <Search className="my-3"
+                            placeholder="传单派发"
+                            enterButton="搜索"
+                            size="large"
+                            onSearch={value => console.log(value)}
+                    />
+                  </div>
+                </Col>
+              </Row>
+
               <Row gutter={40}>
                 <Col span={12}>
                   <h2 className="text-white font-weight-bold" >职位推荐</h2>
@@ -60,7 +66,7 @@ class YunqiSection1 extends React.Component{
             </Form>
           </Row>
         </div>
-      </div>
+      </Banner>
     );
   }
 }

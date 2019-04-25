@@ -19,11 +19,11 @@ class HeadTop extends React.Component{
   }
   render() {
     return (
-      <div className="container-fluid py-1 bg-dark d-flex align-items-center" id="hread">
+      <div className="container-fluid  bg-dark d-flex align-items-center" id="hread" style={{padding:"8px 0"}}>
         <div className="container bg-dark align-items-center">
           <div className="row">
             <div className="col-xl-6 col-lg-6 col-md-12 col-md-12 text-white fontSize14">
-              <a className="d-flex align-items-center" onClick={this.showModal} data-toggle="modal" >
+              <a className="d-flex align-items-center text-white" onClick={this.showModal} data-toggle="modal" >
                 <span className="iconfont icon-weixin fontSize18"></span>
                 <span className="mr-2"></span>
                 <span className="">关注微信公众号</span>
@@ -39,12 +39,10 @@ class HeadTop extends React.Component{
                 </div>
               </Modal>
             </div>
-            <div className="align-items-center col-xl-6 col-lg-6 col-md-12 col-md-12 text-white fontSize14 d-flex justify-content-between"  >
+            <div className=" col-xl-6 col-lg-6 col-md-12 col-md-12 text-white fontSize14 "  >
               <LoginCompoent userid={this.props.userid}/>
-              <span className="iconfont icon-iconfonticonshutiao1" ></span>
             {/*  <Link to="/"  className="text-white">我的订单</Link>
               <Link to="/"  className="text-white">申请成为服务商</Link>*/}
-              <span>热线电话：233-233-3333</span>
             </div>
           </div>
         </div>

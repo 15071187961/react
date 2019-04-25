@@ -3,23 +3,28 @@ import PageBanner from "./PageBanner";
 import Title from "./Title";
 import aboutbanner from '../img/about.jpg'
 import SecondTitle from "./SecondTitle";
-import FabuBtn from "./FabuBtn";
 import BorderLineBlock from "./BorderLineBlock";
 import GuanyuMap from "./GuanyuMap";
 import GuanyuUs from "./GuanyuUs";
+import {Banner, BannerBtn, FirstLevelTitle, TowLevelTitle} from "../component/BaseComponents";
+import bannerImg from "../img/about.jpg";
 
 class Guanyu extends React.Component{
   render() {
     return(
       <div className="container-fluid p-0">
-        <PageBanner bgimg={aboutbanner}>
-          <Title title="关于我们"/>
-          <SecondTitle title="文案文案文案文案文案文案文案"/>
-          <div className="d-flex justify-content-center">
-            <FabuBtn link="/" linktitle="了解详情" />
+        <Banner bannerImg={bannerImg}>
+          <FirstLevelTitle  className="pb-3" title="关于我们"/>
+          <TowLevelTitle  className=" mb-5" title="文案文案文案文案文案文案文案"/>
+          <div className="container">
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <BannerBtn title="了解详情"/>
+              </div>
+            </div>
           </div>
-        </PageBanner>
-        <BorderLineBlock title="公司介绍"/>
+        </Banner>
+        <BorderLineBlock  color="black" title="公司介绍"/>
         <div className="container mb-5">
           <div className="row">
             <div className="col-12">

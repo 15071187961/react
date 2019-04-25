@@ -10,7 +10,7 @@ class GuanyuMap extends React.Component{
   render() {
     return(
       <div className="container-fluid p-0 bg-secondary" style={{height:"800px"}}>
-          <BorderLineBlock title="商务布局"/>
+          <BorderLineBlock color="black" title="商务布局"/>
           <div className="text-center fontSize18"> 惠企云平台在全国业务布局三大区域  <br/>  华中大区+华北大区+华南大区    <br/> （我们已经有招商团队入驻）</div>
           <div className="container">
             <div className="row">

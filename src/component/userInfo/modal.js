@@ -38,8 +38,6 @@ class _modal extends React.Component{
     handleCancel(e){
 
         if(e==="true"){
-
-            alert('已支付')
             this.setState({
                 chargeSuccess:true,
                 buttonStr:"选择用工"
@@ -65,9 +63,13 @@ class _modal extends React.Component{
     }
 
     componentDidMount(){
-        console.log("匹配用工")
-        console.log(this.props)
 
+       if(this.props.orderData.pay=="已经支付"){
+           this.setState({
+               chargeSuccess:true,
+               buttonStr:"选择用工"
+           });
+       }
         if(this.props.orderIdOk){
             this.setState({
                 visible: false,

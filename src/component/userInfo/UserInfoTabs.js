@@ -22,6 +22,11 @@ class UserInfoTabs extends React.Component{
         this.tab01Flat = this.tab01Flat.bind(this)
         this.loginOut = this.loginOut.bind(this)
     }
+    TabClick(e){
+        this.setState({
+            tab01Flat:true,
+        })
+    }
     loginOut(event){
         event.preventDefault();
         alert("logout")
@@ -85,6 +90,7 @@ class UserInfoTabs extends React.Component{
         defaultActiveKey="1"
         tabPosition={mode}
         tabPosition={mode}
+        onTabClick={this.TabClick.bind(this)}
         style={{ position:"static" }}
     >
         <TabPane tab="我的订单" key="1">

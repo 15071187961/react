@@ -50,7 +50,7 @@ class Project extends React.Component{
       if(response.data.res === 1){
         message.success("申请成功")
       } else {
-        message.warning(response.data.err)
+        message.error(response.data.err)
       }
     }).catch(function (err) {
       message.error(err)
@@ -67,10 +67,11 @@ class Project extends React.Component{
       goods_id:_that.state.projectid,
       order_id:_that.state.projectid
     }).then(function (response) {
+      console.log(response)
       if(response.data.res ===1){
-        message.success("发起成功")
+        message.success("申请成功")
       }else {
-        message.warning(response.data.err)
+        message.error(response.data.err)
       }
     }).catch(function (err) {
       message.error(err)
@@ -79,9 +80,16 @@ class Project extends React.Component{
   }
   render() {
     const  projectinfo = this.state.projectinfo
+    const Title=(
+      <div className="d-flex align-items-center">
+        <span style={{color:"#666666"}}>云企公坊</span>
+        <span className="iconfont icon-circle-fill mx-1 fontSize14"></span>
+        <span>项目详情</span>
+      </div>
+    )
     return (
       <div style={{marginBottom:"100px"}}>
-        <BorderShadowWrap title={"云企工坊>项目详情"}>
+        <BorderShadowWrap title={Title}>
           <Row className=" mt-1" >
             <Col span={24}>
               <span>更新：{projectinfo.timee}</span>
@@ -104,7 +112,7 @@ class Project extends React.Component{
           </Row>
         </BorderShadowWrap>
         <div className="container">
-          <Row className="bg-white px-5 py-3 mt-3 shadow ">
+          <Row className="bg-white px-5 py-3 shadow " style={{marginTop:"-75px"}}>
             <Col span={24}>
               <h6 className="my-3 text-break">
                 <p className="small">任务详情</p>

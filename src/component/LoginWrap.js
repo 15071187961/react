@@ -14,9 +14,9 @@ class LoginWrap extends React.Component{
           <div className="row rounded-lg bg-white  shadow no-gutters justify-content-center"  id="login">
             <div className="col-6 h-100  d-flex flex-column justify-content-center">
               <div className="d-flex justify-content-center">
-                <img src={logo} width="150" height="150" alt=""/>
+                <img src={logo} width="72" height="72" alt=""/>
               </div>
-              <p className="text-center logotitle text-warning">惠企云2</p>
+              <h4 className="text-center my-2  text-warning">惠企云</h4>
             </div>
             <div className="col-6  h-100 px-5">
               {this.props.children}

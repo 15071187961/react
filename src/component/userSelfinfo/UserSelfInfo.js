@@ -6,6 +6,7 @@ import UserPhoto from "./UserPhoto";
 import UserInfoTool from "./UserInfoTool";
 import UserInfoTabs from "./UserInfoTabs";
 import "../../css/userInfo.css";
+import isLogin from "../IsLogin";
 class UserInfo extends React.Component{
   constructor(props) {
     super(props);
@@ -13,15 +14,17 @@ class UserInfo extends React.Component{
       userdata:"",
     }
   }
-  componentDidMount(){
-    const userid = localStorage.getItem("hyquser_id")
+  componentWillMount(){
+    console.log(localStorage.getItem("hyquser_id"))
+   /* const userid = localStorage.getItem("hyquser_id")
     const usertoken = localStorage.getItem("hyqutoken")
     const _that = this
     axios.post("/user/info/info",{
       user_id_check:userid,
       token_check:usertoken
     }).then(function (response) {
-
+      debugger;
+      console.log(response)
       if(response.data.res === 1){
         console.log("用户认证成功")
         _that.setState({userdata: response.data.data})
@@ -33,7 +36,23 @@ class UserInfo extends React.Component{
       }
     }).catch(function (err) {
       alert(err)
-    })
+    })*/
+    const _that=this
+    if(isLogin()){
+      const userid = localStorage.getItem("hyquser_id")
+      const usertoken = localStorage.getItem("hyqutoken")
+      if(userid && usertoken){
+        axios.post("/user/info/info",{
+          user_id_check:userid,
+          token_check:usertoken
+        }).then(function (response) {
+          _that.setState({userdata:response.data.data})
+        }).catch(function (err) {
+          alert(err)
+        })
+      }
+      _that.setState({userid: userid,usertoken:usertoken});
+    }
   }
   render() {
     return (
