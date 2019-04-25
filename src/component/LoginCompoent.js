@@ -60,7 +60,7 @@ class LoginCompoent extends React.Component{
         return(
           <div className="row d-flex justify-content-end">
             <div className="col-8 justify-content-between  d-flex">
-              <span>欢迎</span><span className="px-1">|</span>
+              <span>欢迎{userInfo.phone}</span><span className="px-1">|</span>
               {userInfo.usertype =="个人用户"
                 ? <Link to={`/userself/${userid}`} className="text-white ">个人中心</Link>
                 :<Link to={`/userinfo/${userid}`} className="text-white ">个人中心</Link>}
